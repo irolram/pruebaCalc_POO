@@ -18,7 +18,7 @@ class Calculadora(private val ui: IEntradaSalida) {
                 val numero2 = pedirNumero("Introduce el segundo número: ", "El segundo número no es válido!")
                 return Triple(numero1,operador,numero2)
             }catch (e: InfoCalcException){
-                println("sdad")
+                ui.mostrarError(e.message ?: "Error al procesar los datos.")
             }
 
         }
@@ -27,14 +27,14 @@ class Calculadora(private val ui: IEntradaSalida) {
 
 
 
-    private fun realizarCalculo(numero1: Double, operador: Operadores, numero2: Double):Triple<Double, Operadores, Double>{
-        when (operador) {
+    private fun realizarCalculo(numero1: Double, operador: Operadores, numero2: Double): Double{
+        return when (operador) {
             Operadores.SUMA -> numero1 + numero2
             Operadores.RESTA -> numero1 - numero2
             Operadores.MULTIPLICACION -> numero1 * numero2
             Operadores.DIVISION -> numero1 / numero2
         }
-        return Triple(numero1,operador,numero2)
+
     }
 
 
